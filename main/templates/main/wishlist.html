@@ -1,0 +1,70 @@
+{% extends 'extend/base2.html' %}
+
+{% block 'content' %}
+{% load static %}
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="{% url 'home' %}" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Wishlist
+			</span>
+		</div>
+	</div>
+		
+
+	<!-- Wishlist -->
+	<form class="bg0 p-t-75 p-b-85">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">Product</th>
+									<th class="column-1">Product Name</th>
+									<th class="column-1">Price</th>
+									<th class="column-1">Color</th>
+									<th class="column-1">Remove</th>
+								</tr>
+
+								{% for product in products %}
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											{% for img in product.product.img.all %}
+												{% if forloop.first %}
+													<img src="{{ img.img.url }}" alt="IMG">
+												{% endif %}
+											{% endfor %}
+										</div>
+									</td>
+									<td class="column-1">{{ product.product.product_name }}</td>
+									<td class="column-1">$ {{ product.product.price }}</td>
+									<td class="column-1">{{ product.product.color.color }}</td>
+									<td class="column-1">
+										<img class="remove-liked-product" style='width: 25px; height: 25px; cursor: pointer;' 
+											src="{% static 'images/icons/remove.png' %}" 
+											data-product-id="{{ product.product.id }}">
+									</td>
+								</tr>
+								{% endfor %}
+
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+		
+<script src={% static 'js/like.js' %} ></script>
+{% endblock %}		
+
+	
